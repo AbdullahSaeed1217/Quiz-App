@@ -1,0 +1,23 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./quiz-app-backend
+    ports:
+      - "5000:5000"
+    networks:
+      - quiz-net
+
+  frontend:
+    build:
+      context: ./quiz-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - quiz-net
+
+networks:
+  quiz-net:
+    driver: bridge
